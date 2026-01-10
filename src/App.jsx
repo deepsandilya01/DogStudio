@@ -2,6 +2,7 @@ import "./App.css";
 import Dog from "./components/Dog";
 import { Canvas } from "@react-three/fiber";
 import { useRef, useEffect } from "react";
+import { Environment } from "@react-three/drei";
 
 function App() {
   const audioRef = useRef(null);
@@ -44,6 +45,12 @@ function App() {
         </div>
         <Canvas
           id="canvas-elem"
+          shadows
+          camera={{ position: [0, 0, 1], fov: 45 }}
+          gl={{
+            antialias: true,
+            physicallyCorrectLights: true,
+          }}
           style={{
             height: "100vh",
             width: "100vw",
@@ -53,8 +60,23 @@ function App() {
             zIndex: 1,
           }}
         >
+          <Environment preset="sunset" />
+
+          <ambientLight intensity={0.3} />
+
+          <directionalLight
+            position={[3, 5, 5]}
+            intensity={2}
+            castShadow
+            shadow-mapSize-width={2048}
+            shadow-mapSize-height={2048}
+          />
+
+          <directionalLight position={[-3, 2, -4]} intensity={1.5} />
+
           <Dog />
         </Canvas>
+
         <section id="section-1">
           <nav>
             <div className="nav-elem">
@@ -143,6 +165,9 @@ function App() {
           </div>
         </section>
         <section id="section-3"></section>
+        <footer>
+          © 2026 Deep Sandilya | Built with ❤️
+        </footer>
       </main>
     </>
   );

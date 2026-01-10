@@ -18,8 +18,9 @@ const Dog = () => {
   const model = useGLTF("/models/dog.drc.glb");
 
   useThree(({ camera, scene, gl }) => {
-    camera.position.z = 0.55;
-    gl.toneMapping = THREE.ReinhardToneMapping;
+    camera.position.z = 0.70;
+    gl.toneMapping = THREE.ACESFilmicToneMapping;
+    gl.toneMappingExposure = 1.2;
     gl.outputColorSpace = THREE.SRGBColorSpace;
   });
 
@@ -32,6 +33,9 @@ const Dog = () => {
   const [normalMap] = useTexture(["/dog_normals.jpg"]).map((texture) => {
     texture.flipY = false;
     texture.colorSpace = THREE.SRGBColorSpace;
+
+    texture.anisotropy = 16;
+
     return texture;
   });
 
@@ -141,6 +145,11 @@ const Dog = () => {
   dogMaterial.onBeforeCompile = onBeforeCompile;
 
   model.scene.traverse((child) => {
+    if (child.isMesh) {
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+
     if (child.name.includes("DOG")) {
       child.material = dogMaterial;
     } else {
@@ -157,7 +166,7 @@ const Dog = () => {
         endTrigger: "#section-3",
         start: "top top",
         end: "bottom bottom",
-        markers: true,
+        // markers: true,
         scrub: true,
       },
     });
