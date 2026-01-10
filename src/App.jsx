@@ -164,10 +164,39 @@ function App() {
             </div>
           </div>
         </section>
-        <section id="section-3"></section>
-        <footer>
-          © 2026 Deep Sandilya | Built with ❤️
-        </footer>
+        <section id="section-3">
+          <div className="top">
+            <div className="left">
+              <h3>
+                We're crafting <br />
+                emotional <br />
+                experiences aimed <br />
+                at improvingbr results
+              </h3>
+            </div>
+            <div className="right"></div>
+          </div>
+        </section>
+        <div id="section-4">
+          <div className="bottom">
+            <div className="left"></div>
+            <div className="right">
+              <p>
+                Dogstudio is a design & technology firm working globally from
+                our offices based in Belgium and Chicago. Our strong focus on
+                producing high quality & emotional brandings, digital products
+                and experiences became a signature
+              </p>
+              <p>
+                We’re passionate about moving people and solving problems for
+                the likes of Microsoft, The Museum of Science And Industry Of
+                Chicago, The Kennedy Center of Washington, Dragone, Quanta
+                Magazine, and many more.
+              </p>
+            </div>
+          </div>
+        </div>
+        <footer>© 2026 Deep Sandilya | Built with ❤️</footer>
       </main>
     </>
   );
