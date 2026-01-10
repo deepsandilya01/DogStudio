@@ -106,27 +106,25 @@ const Dog = () => {
   });
 
   const branchMaterial = new THREE.MeshMatcapMaterial({
-  matcap: mat2,
-});
+    matcap: mat2,
+  });
 
-const leafMaterial = new THREE.MeshMatcapMaterial({
-  matcap: mat2,
-  side: THREE.DoubleSide,
-  transparent: true,
-  opacity: 0.9,
-});
+  const leafMaterial = new THREE.MeshMatcapMaterial({
+    matcap: mat2,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: 0.9,
+  });
 
+  function onBeforeCompile(shader) {
+    shader.uniforms.uMatcapTexture1 = material.current.uMatcap1;
+    shader.uniforms.uMatcapTexture2 = material.current.uMatcap2;
+    shader.uniforms.uProgress = material.current.uProgress;
+    shader.uniforms.uUseGradient = { value: 1 }; // default ON
 
-
- function onBeforeCompile(shader) {
-  shader.uniforms.uMatcapTexture1 = material.current.uMatcap1;
-  shader.uniforms.uMatcapTexture2 = material.current.uMatcap2;
-  shader.uniforms.uProgress = material.current.uProgress;
-  shader.uniforms.uUseGradient = { value: 1 }; // default ON
-
-  shader.fragmentShader = shader.fragmentShader.replace(
-    "void main() {",
-    `
+    shader.fragmentShader = shader.fragmentShader.replace(
+      "void main() {",
+      `
       uniform sampler2D uMatcapTexture1;
       uniform sampler2D uMatcapTexture2;
       uniform float uProgress;
@@ -134,11 +132,11 @@ const leafMaterial = new THREE.MeshMatcapMaterial({
 
       void main() {
     `
-  );
+    );
 
-  shader.fragmentShader = shader.fragmentShader.replace(
-    "vec4 matcapColor = texture2D( matcap, uv );",
-    `
+    shader.fragmentShader = shader.fragmentShader.replace(
+      "vec4 matcapColor = texture2D( matcap, uv );",
+      `
       vec4 matcapColor1 = texture2D( uMatcapTexture1, uv );
       vec4 matcapColor2 = texture2D( uMatcapTexture2, uv );
 
@@ -152,50 +150,48 @@ const leafMaterial = new THREE.MeshMatcapMaterial({
 
       vec4 matcapColor = mix(matcapColor2, matcapColor1, progress);
     `
-  );
-}
-dogMaterial.onBeforeCompile = (shader) => {
-  onBeforeCompile(shader);
-  shader.uniforms.uUseGradient.value = 1;
-};
-leafMaterial.onBeforeCompile = (shader) => {
-  onBeforeCompile(shader);
-  shader.uniforms.uUseGradient.value = 0;
-};
-branchMaterial.onBeforeCompile = (shader) => {
-  onBeforeCompile(shader);
-  shader.uniforms.uUseGradient.value = 0;
-};
+    );
+  }
+  dogMaterial.onBeforeCompile = (shader) => {
+    onBeforeCompile(shader);
+    shader.uniforms.uUseGradient.value = 1;
+  };
+  leafMaterial.onBeforeCompile = (shader) => {
+    onBeforeCompile(shader);
+    shader.uniforms.uUseGradient.value = 0;
+  };
+  branchMaterial.onBeforeCompile = (shader) => {
+    onBeforeCompile(shader);
+    shader.uniforms.uUseGradient.value = 0;
+  };
 
+  dogMaterial.onBeforeCompile = onBeforeCompile;
+  branchMaterial.onBeforeCompile = onBeforeCompile;
+  leafMaterial.onBeforeCompile = onBeforeCompile;
 
-dogMaterial.onBeforeCompile = onBeforeCompile;
-branchMaterial.onBeforeCompile = onBeforeCompile;
-leafMaterial.onBeforeCompile = onBeforeCompile;
+  useEffect(() => {
+    model.scene.traverse((child) => {
+      if (!child.isMesh) return;
 
+      // 🐶 DOG BODY ONLY
+      if (child.name.includes("DOG_BODY")) {
+        child.material = dogMaterial;
+      }
 
-useEffect(() => {
-  model.scene.traverse((child) => {
-    if (!child.isMesh) return;
+      // 🍃 LEAVES
+      else if (
+        child.name.includes("hazel_leaf") ||
+        child.name.includes("maple_leaf")
+      ) {
+        child.material = leafMaterial;
+      }
 
-    // 🐶 DOG BODY ONLY
-    if (child.name.includes("DOG_BODY")) {
-      child.material = dogMaterial;
-    }
-
-    // 🍃 LEAVES
-    else if (
-      child.name.includes("hazel_leaf") ||
-      child.name.includes("maple_leaf")
-    ) {
-      child.material = leafMaterial;
-    }
-
-    // 🌿 BRANCHES
-    else if (child.name.includes("branch")) {
-      child.material = branchMaterial;
-    }
-  });
-}, [model]);
+      // 🌿 BRANCHES
+      else if (child.name.includes("branch")) {
+        child.material = branchMaterial;
+      }
+    });
+  }, [model]);
 
   const dogModel = useRef(model);
 

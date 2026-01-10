@@ -49,7 +49,7 @@ section {
     align-items: center;
     padding: 1.5rem 2.5rem;
     padding-top: 3.5rem;
-
+    
     .nav-elem:nth-child(2) {
       i {
         color: red;
@@ -227,7 +227,7 @@ main:has(#section-2 .title[img-title="opera"]:hover) .images #opera {
   .bottom {
     display: flex;
     width: 100%;
-    gap: 10rem ;
+    gap: 10rem;
   }
 
   .left,
@@ -235,20 +235,20 @@ main:has(#section-2 .title[img-title="opera"]:hover) .images #opera {
     width: 100%;
   }
 
-.top .left{
-  padding-left: 5rem;
+  .top .left {
+    padding-left: 5rem;
 
-  h3{
-    font-size: 3rem;
-    font-weight: 200;
-    opacity: 0.6;
+    h3 {
+      font-size: 3rem;
+      font-weight: 200;
+      opacity: 0.6;
+    }
   }
-}
 
-  .bottom .right{
+  .bottom .right {
     display: flex;
 
-    p{
+    p {
       opacity: 0.5;
       font-weight: 200;
       font-size: 1rem;
@@ -258,16 +258,15 @@ main:has(#section-2 .title[img-title="opera"]:hover) .images #opera {
   }
 }
 
-#section-4{
+#section-4 {
+  padding-inline: 10rem;
+  min-height: 50vh;
 
-    padding-inline: 10rem;
-    min-height: 50vh;
-
-   .top,
+  .top,
   .bottom {
     display: flex;
     width: 100%;
-    gap: 10rem ;
+    gap: 10rem;
   }
 
   .left,
@@ -275,25 +274,72 @@ main:has(#section-2 .title[img-title="opera"]:hover) .images #opera {
     width: 100%;
   }
 
-.top .left{
-  padding-left: 5rem;
+  .top .left {
+    padding-left: 5rem;
 
-  h3{
-    font-size: 3rem;
-    font-weight: 200;
-    opacity: 0.6;
+    h3 {
+      font-size: 3rem;
+      font-weight: 200;
+      opacity: 0.6;
+    }
   }
-}
 
-  .bottom .right{
+  .bottom .right {
     display: flex;
+    gap: 1rem;
 
-    p{
+    p {
       opacity: 0.5;
       font-weight: 200;
       font-size: 1rem;
       position: relative;
       z-index: 4;
+      h6 {
+        font-size: 1rem;
+        opacity: 1;
+        padding-top: 10px;
+        text-decoration: underline red;
+      }
     }
   }
+}
+
+#right {
+  display: flex;
+  justify-content: end;
+  padding-right: 11.5%;
+}
+
+.ft {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-left: 11.5%;
+  margin-right: 11.5%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h5{
+    position: relative;
+      z-index: 4;
+    font-size: 2rem;
+    font-weight: 200;
+    opacity: 1;
+    text-decoration: underline rgba(255, 0, 0, 0.447);
+  }
+
+  p{
+    position: relative;
+      z-index: 4;
+    font-weight: 100;
+  }
+}
+
+#dp{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+      z-index: 4;
 }

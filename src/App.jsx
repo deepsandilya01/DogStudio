@@ -186,6 +186,7 @@ function App() {
                 our offices based in Belgium and Chicago. Our strong focus on
                 producing high quality & emotional brandings, digital products
                 and experiences became a signature
+                <h6>Discover our values</h6>
               </p>
               <p>
                 We’re passionate about moving people and solving problems for
@@ -196,7 +197,21 @@ function App() {
             </div>
           </div>
         </div>
-        <footer>© 2026 Deep Sandilya | Built with ❤️</footer>
+        <footer id="section-5">
+          <div id="right">
+            <h4>
+            WE <br /> Make <br /> Good <br />
+            Shit
+          </h4>
+          </div>
+          <div className="ft">
+            <h5>Chicago .</h5>
+            <h5>Amsterdam .</h5>
+            <h5>Paris .</h5>
+            <p>Fb / Ins / Dri / Tw</p>
+          </div>
+         <p id="dp"> © 2026 Deep Sandilya | Built with ❤️</p>
+        </footer>
       </main>
     </>
   );
