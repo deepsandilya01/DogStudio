@@ -188,6 +188,7 @@ function App() {
                 and experiences became a signature
                 <h6>Discover our values</h6>
               </p>
+              {/* h6 check krna hai */}
               <p>
                 We’re passionate about moving people and solving problems for
                 the likes of Microsoft, The Museum of Science And Industry Of
