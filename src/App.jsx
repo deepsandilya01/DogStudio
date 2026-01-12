@@ -10,21 +10,20 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [supportsHas, setSupportsHas] = useState(false);
 
-  // Handle loader completion
+
   const handleLoaderComplete = () => {
     setIsLoading(false);
   };
 
   useEffect(() => {
-    // Check for :has() support
+
     try {
-      document.querySelector(':has(*)');
+      document.querySelector(":has(*)");
       setSupportsHas(true);
     } catch {
       setSupportsHas(false);
     }
 
-    // Audio setup
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -34,44 +33,42 @@ function App() {
       document.removeEventListener("keydown", unlockAudio);
       document.removeEventListener("touchstart", unlockAudio);
     };
-    
+
     document.addEventListener("pointerdown", unlockAudio, { once: true });
     document.addEventListener("keydown", unlockAudio, { once: true });
     document.addEventListener("touchstart", unlockAudio, { once: true });
 
-    // Fallback hover effects for browsers without :has() support
     if (!supportsHas) {
       const setupFallbackHovers = () => {
-        const canvas = document.getElementById('canvas-elem');
-        const images = document.querySelectorAll('.images img');
-        
-        document.querySelectorAll('.title').forEach(title => {
-          const imgTitle = title.getAttribute('img-title');
+        const canvas = document.getElementById("canvas-elem");
+        const images = document.querySelectorAll(".images img");
+
+        document.querySelectorAll(".title").forEach((title) => {
+          const imgTitle = title.getAttribute("img-title");
           const targetImg = document.getElementById(imgTitle);
-          
-          title.addEventListener('mouseenter', () => {
-            if (canvas) canvas.classList.add('hide-background');
-            images.forEach(img => img.classList.remove('active'));
-            if (targetImg) targetImg.classList.add('active');
+
+          title.addEventListener("mouseenter", () => {
+            if (canvas) canvas.classList.add("hide-background");
+            images.forEach((img) => img.classList.remove("active"));
+            if (targetImg) targetImg.classList.add("active");
           });
-          
-          title.addEventListener('mouseleave', () => {
-            if (canvas) canvas.classList.remove('hide-background');
-            if (targetImg) targetImg.classList.remove('active');
+
+          title.addEventListener("mouseleave", () => {
+            if (canvas) canvas.classList.remove("hide-background");
+            if (targetImg) targetImg.classList.remove("active");
           });
         });
       };
-      
-      // Setup after DOM is ready
+
       setTimeout(setupFallbackHovers, 100);
     }
   }, [supportsHas]);
 
   return (
     <>
-      {/* Show loader while loading */}
+
       {isLoading && <Loader onComplete={handleLoaderComplete} />}
-      
+
       <audio
         ref={audioRef}
         src="/ambience.mp3"
@@ -81,17 +78,30 @@ function App() {
         style={{ display: "none" }}
       />
 
-      <main style={{ opacity: isLoading ? 0 : 1, transition: 'opacity 0.8s ease-in-out' }}>
+      <main
+        style={{
+          opacity: isLoading ? 0 : 1,
+          transition: "opacity 0.8s ease-in-out",
+        }}
+      >
         <div className="images">
-          <img id="tomorrowland" src="/tommorowland.png" alt="Tomorrowland Project" />
+          <img
+            id="tomorrowland"
+            src="/tommorowland.png"
+            alt="Tomorrowland Project"
+          />
           <img id="navy-pier" src="/navy-pier.png" alt="Navy Pier Project" />
-          <img id="msi-chicago" src="/msi-chicago.png" alt="MSI Chicago Project" />
+          <img
+            id="msi-chicago"
+            src="/msi-chicago.png"
+            alt="MSI Chicago Project"
+          />
           <img id="phone" src="/phone.png" alt="Louise's Phone Project" />
           <img id="kikk" src="/kikk.png" alt="KIKK Festival Project" />
           <img id="kennedy" src="/kennedy.png" alt="Kennedy Center Project" />
           <img id="opera" src="/opera.png" alt="Royal Opera Project" />
         </div>
-        
+
         <Canvas
           id="canvas-elem"
           shadows
@@ -112,7 +122,7 @@ function App() {
         >
           <Suspense fallback={null}>
             <Environment preset="sunset" />
-            
+
             <ambientLight intensity={0.3} />
 
             <directionalLight
@@ -285,7 +295,7 @@ function App() {
                   <i className="ri-instagram-line"></i>
                 </a>
               </div>
-              <div className="dp"> © 2026 Deep Sandilya | Built with ❤️</div>
+              <div className="dp"> © 2026 Deep Sandilya | Inspired by Dogstudio</div>
             </div>
           </div>
         </footer>

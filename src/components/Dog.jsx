@@ -172,39 +172,38 @@ const Dog = () => {
   leafMaterial.onBeforeCompile = onBeforeCompile;
 
   useEffect(() => {
-  model.scene.traverse((child) => {
-    if (!child.isMesh) return;
+    model.scene.traverse((child) => {
+      if (!child.isMesh) return;
 
-    // 🐶 DOG BODY
-    if (child.name.includes("DOG_BODY")) {
-      child.material = dogMaterial;
-    }
+      // 🐶 DOG BODY
+      if (child.name.includes("DOG_BODY")) {
+        child.material = dogMaterial;
+      }
 
-    // 👁️ RIGHT EYE
-    else if (child.name.includes("Reye")) {
-      child.material = eyeMaterial;
-    }
+      // 👁️ RIGHT EYE
+      else if (child.name.includes("Reye")) {
+        child.material = eyeMaterial;
+      }
 
-    // 👁️ LEFT EYE
-    else if (child.name.includes("Leye")) {
-      child.material = eyeMaterial;
-    }
+      // 👁️ LEFT EYE
+      else if (child.name.includes("Leye")) {
+        child.material = eyeMaterial;
+      }
 
-    // 🍃 LEAVES
-    else if (
-      child.name.includes("hazel_leaf") ||
-      child.name.includes("maple_leaf")
-    ) {
-      child.material = leafMaterial;
-    }
+      // 🍃 LEAVES
+      else if (
+        child.name.includes("hazel_leaf") ||
+        child.name.includes("maple_leaf")
+      ) {
+        child.material = leafMaterial;
+      }
 
-    // 🌿 BRANCHES
-    else if (child.name.includes("branch")) {
-      child.material = branchMaterial;
-    }
-  });
-}, [model]);
-
+      // 🌿 BRANCHES
+      else if (child.name.includes("branch")) {
+        child.material = branchMaterial;
+      }
+    });
+  }, [model]);
 
   const dogModel = useRef(model);
 
