@@ -186,9 +186,7 @@ function App() {
                 our offices based in Belgium and Chicago. Our strong focus on
                 producing high quality & emotional brandings, digital products
                 and experiences became a signature
-                <h6>Discover our values</h6>
               </p>
-              {/* h6 check krna hai */}
               <p>
                 We’re passionate about moving people and solving problems for
                 the likes of Microsoft, The Museum of Science And Industry Of
@@ -197,21 +195,45 @@ function App() {
               </p>
             </div>
           </div>
+          <div id="btm">
+            <h6>Discover our values</h6>
+          </div>
         </div>
         <footer id="section-5">
           <div id="right">
             <h4>
-            WE <br /> Make <br /> Good <br />
-            Shit
-          </h4>
+              WE <br /> Make <br /> Good <br />
+              Shit
+            </h4>
           </div>
-          <div className="ft">
-            <h5>Chicago .</h5>
-            <h5>Amsterdam .</h5>
-            <h5>Paris .</h5>
-            <p>Fb / Ins / Dri / Tw</p>
+          <div className="footr">
+            <div className="ft">
+              <h5>Chicago .</h5>
+              <h5>Amsterdam .</h5>
+              <h5>Paris .</h5>
+              <p>Fb / Ins / Dri / Tw</p>
+            </div>
+            <div className="devd">
+              <div id="tag">
+                <a target="_blank" href="https://github.com/deepsandilya01">
+                  <i className="ri-github-fill"></i>
+                </a>
+                <a
+                  target="_blank"
+                  href="https://www.linkedin.com/in/deepsandilya01"
+                >
+                  <i className="ri-linkedin-fill"></i>
+                </a>
+                <a
+                  target="_blank"
+                  href="https://www.instagram.com/deepsandilya_01"
+                >
+                  <i className="ri-instagram-line"></i>
+                </a>
+              </div>
+              <div className="dp"> © 2026 Deep Sandilya | Built with ❤️</div>
+            </div>
           </div>
-         <p id="dp"> © 2026 Deep Sandilya | Built with ❤️</p>
         </footer>
       </main>
     </>

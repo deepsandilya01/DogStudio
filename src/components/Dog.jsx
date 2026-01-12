@@ -95,7 +95,7 @@ const Dog = () => {
   });
 
   const material = useRef({
-    uMatcap1: { value: mat19 },
+    uMatcap1: { value: mat2 },
     uMatcap2: { value: mat2 },
     uProgress: { value: 1.0 },
   });
@@ -114,6 +114,20 @@ const Dog = () => {
     side: THREE.DoubleSide,
     transparent: true,
     opacity: 0.9,
+  });
+
+  const eyeMaterial = new THREE.MeshPhysicalMaterial({
+    color: new THREE.Color(0x080402),
+    roughness: 0.12,
+    metalness: 0.0,
+
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.03,
+
+    ior: 1.38,
+    transmission: 0.0,
+
+    reflectivity: 0.6,
   });
 
   function onBeforeCompile(shader) {
@@ -152,46 +166,45 @@ const Dog = () => {
     `
     );
   }
-  dogMaterial.onBeforeCompile = (shader) => {
-    onBeforeCompile(shader);
-    shader.uniforms.uUseGradient.value = 1;
-  };
-  leafMaterial.onBeforeCompile = (shader) => {
-    onBeforeCompile(shader);
-    shader.uniforms.uUseGradient.value = 0;
-  };
-  branchMaterial.onBeforeCompile = (shader) => {
-    onBeforeCompile(shader);
-    shader.uniforms.uUseGradient.value = 0;
-  };
 
   dogMaterial.onBeforeCompile = onBeforeCompile;
   branchMaterial.onBeforeCompile = onBeforeCompile;
   leafMaterial.onBeforeCompile = onBeforeCompile;
 
   useEffect(() => {
-    model.scene.traverse((child) => {
-      if (!child.isMesh) return;
+  model.scene.traverse((child) => {
+    if (!child.isMesh) return;
 
-      // 🐶 DOG BODY ONLY
-      if (child.name.includes("DOG_BODY")) {
-        child.material = dogMaterial;
-      }
+    // 🐶 DOG BODY
+    if (child.name.includes("DOG_BODY")) {
+      child.material = dogMaterial;
+    }
 
-      // 🍃 LEAVES
-      else if (
-        child.name.includes("hazel_leaf") ||
-        child.name.includes("maple_leaf")
-      ) {
-        child.material = leafMaterial;
-      }
+    // 👁️ RIGHT EYE
+    else if (child.name.includes("Reye")) {
+      child.material = eyeMaterial;
+    }
 
-      // 🌿 BRANCHES
-      else if (child.name.includes("branch")) {
-        child.material = branchMaterial;
-      }
-    });
-  }, [model]);
+    // 👁️ LEFT EYE
+    else if (child.name.includes("Leye")) {
+      child.material = eyeMaterial;
+    }
+
+    // 🍃 LEAVES
+    else if (
+      child.name.includes("hazel_leaf") ||
+      child.name.includes("maple_leaf")
+    ) {
+      child.material = leafMaterial;
+    }
+
+    // 🌿 BRANCHES
+    else if (child.name.includes("branch")) {
+      child.material = branchMaterial;
+    }
+  });
+}, [model]);
+
 
   const dogModel = useRef(model);
 
@@ -352,6 +365,7 @@ const Dog = () => {
         rotation={[0, Math.PI / 3.9, 0]}
       />
       <directionalLight position={[0, 5, 5]} color={0xffffff} intensity={10} />
+      <pointLight position={[0.15, 0.1, 1]} intensity={0.4} distance={2} />
     </>
   );
 };
