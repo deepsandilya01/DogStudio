@@ -18,6 +18,10 @@ main {
   position: relative;
 }
 
+html::-webkit-scrollbar{
+  display: none;
+}
+
 section {
   min-height: 100vh;
   position: relative;
@@ -106,7 +110,7 @@ section {
   .first-line {
     width: 35rem;
     background-color: rgba(255, 0, 0, 0.396);
-    height: 1px;
+    height: 1.2px;
     position: absolute;
     transform: rotate(45deg) translate(0, -17rem);
   }
@@ -114,7 +118,7 @@ section {
   .second-line {
     width: 10rem;
     background-color: rgba(255, 0, 0, 0.396);
-    height: 1px;
+    height: 1.2px;
     position: absolute;
     transform: rotate(135deg);
     top: 28%;
@@ -377,4 +381,26 @@ main:has(#section-2 .title[img-title="opera"]:hover) .images #opera {
   );
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
+}
+
+
+.linebt{
+  width: 35rem;
+    background-color: rgba(255, 0, 0, 0.335);
+    height: 1.2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 4;
+    transform: rotate(45deg) translate(0, -17rem);
+}
+
+.line-3{
+ width: 40%;
+    background-color: rgba(255, 0, 0, 0.396);
+    height: 1px;
+    position: absolute;
+    transform: rotate(135deg);
+    bottom: 0;
+    right: 0;
 }

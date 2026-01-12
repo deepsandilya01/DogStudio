@@ -163,6 +163,7 @@ function App() {
               <h1>Royal Opera Of Wallonia</h1>
             </div>
           </div>
+          <div className="line-3"></div>
         </section>
         <section id="section-3">
           <div className="top">
@@ -178,6 +179,7 @@ function App() {
           </div>
         </section>
         <div id="section-4">
+          <div className="linebt"></div>
           <div className="bottom">
             <div className="left"></div>
             <div className="right">
