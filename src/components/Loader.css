@@ -1,0 +1,258 @@
+/* Loader Container */
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.8s ease-out;
+}
+
+.loader-container.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Loader Content */
+.loader-content {
+  text-align: center;
+  color: white;
+  max-width: 400px;
+  padding: 2rem;
+}
+
+/* Logo Animation */
+.loader-logo {
+  margin-bottom: 2rem;
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+.logo-svg {
+  width: 200px;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Loading Text */
+.loader-text {
+  margin-bottom: 2rem;
+}
+
+.loader-text h2 {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 0;
+  letter-spacing: 2px;
+  animation: textPulse 2s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Progress Bar */
+.progress-container {
+  margin-bottom: 2rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4a90e2, #7b68ee, #ff6b6b);
+  background-size: 200% 100%;
+  border-radius: 1px;
+  transition: width 0.6s ease-out;
+  animation: progressShimmer 2s linear infinite;
+}
+
+@keyframes progressShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+/* Animated Dots */
+.loader-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: dotBounce 1.4s ease-in-out infinite both;
+}
+
+.dot:nth-child(1) { animation-delay: -0.32s; }
+.dot:nth-child(2) { animation-delay: -0.16s; }
+.dot:nth-child(3) { animation-delay: 0s; }
+
+@keyframes dotBounce {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Subtitle */
+.loader-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.6;
+  margin: 0;
+  font-weight: 200;
+  letter-spacing: 1px;
+  animation: subtitleFade 3s ease-in-out infinite;
+}
+
+@keyframes subtitleFade {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+}
+
+/* Background Animation */
+.loader-bg-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.floating-element {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(74, 144, 226, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.floating-element:nth-child(1) {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 8s;
+}
+
+.floating-element:nth-child(2) {
+  top: 60%;
+  right: 15%;
+  animation-delay: -2s;
+  animation-duration: 10s;
+}
+
+.floating-element:nth-child(3) {
+  bottom: 20%;
+  left: 20%;
+  animation-delay: -4s;
+  animation-duration: 12s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) scale(1.1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-10px) translateX(-10px) scale(0.9);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translateY(-30px) translateX(5px) scale(1.05);
+    opacity: 0.4;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .loader-content {
+    padding: 1rem;
+    max-width: 300px;
+  }
+
+  .logo-svg {
+    width: 150px;
+  }
+
+  .loader-text h2 {
+    font-size: 1.2rem;
+  }
+
+  .progress-text {
+    font-size: 0.8rem;
+  }
+
+  .loader-subtitle {
+    font-size: 0.8rem;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .loader-container {
+    background: #000000;
+  }
+
+  .progress-bar {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .progress-fill {
+    background: #ffffff;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .loader-logo,
+  .loader-text h2,
+  .loader-subtitle,
+  .floating-element,
+  .dot {
+    animation: none;
+  }
+
+  .progress-fill {
+    animation: none;
+  }
+}

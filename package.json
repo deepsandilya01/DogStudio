@@ -1,8 +1,34 @@
 {
-  "name": "dog-studio-using-react-and-three-js",
-  "private": true,
-  "version": "0.0.0",
+  "name": "dogstudio-clone",
+  "private": false,
+  "version": "1.0.0",
+  "description": "A pixel-perfect recreation of the award-winning Dogstudio website built with React, Three.js, and GSAP",
   "type": "module",
+  "keywords": [
+    "react",
+    "threejs",
+    "gsap",
+    "3d",
+    "animation",
+    "dogstudio",
+    "clone",
+    "portfolio",
+    "creative"
+  ],
+  "author": {
+    "name": "Deep Sandilya",
+    "email": "deepsandilya01@gmail.com",
+    "url": "https://github.com/deepsandilya01"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deepsandilya01/DogStudio.git"
+  },
+  "homepage": "https://dog-studio-flame.vercel.app",
+  "bugs": {
+    "url": "https://github.com/deepsandilya01/DogStudio/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

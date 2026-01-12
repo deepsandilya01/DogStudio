@@ -1,13 +1,30 @@
 import "./App.css";
 import Dog from "./components/Dog";
+import Loader from "./components/Loader";
 import { Canvas } from "@react-three/fiber";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState, Suspense } from "react";
 import { Environment } from "@react-three/drei";
 
 function App() {
   const audioRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [supportsHas, setSupportsHas] = useState(false);
+
+  // Handle loader completion
+  const handleLoaderComplete = () => {
+    setIsLoading(false);
+  };
 
   useEffect(() => {
+    // Check for :has() support
+    try {
+      document.querySelector(':has(*)');
+      setSupportsHas(true);
+    } catch {
+      setSupportsHas(false);
+    }
+
+    // Audio setup
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -17,13 +34,44 @@ function App() {
       document.removeEventListener("keydown", unlockAudio);
       document.removeEventListener("touchstart", unlockAudio);
     };
+    
     document.addEventListener("pointerdown", unlockAudio, { once: true });
     document.addEventListener("keydown", unlockAudio, { once: true });
     document.addEventListener("touchstart", unlockAudio, { once: true });
-  }, []);
+
+    // Fallback hover effects for browsers without :has() support
+    if (!supportsHas) {
+      const setupFallbackHovers = () => {
+        const canvas = document.getElementById('canvas-elem');
+        const images = document.querySelectorAll('.images img');
+        
+        document.querySelectorAll('.title').forEach(title => {
+          const imgTitle = title.getAttribute('img-title');
+          const targetImg = document.getElementById(imgTitle);
+          
+          title.addEventListener('mouseenter', () => {
+            if (canvas) canvas.classList.add('hide-background');
+            images.forEach(img => img.classList.remove('active'));
+            if (targetImg) targetImg.classList.add('active');
+          });
+          
+          title.addEventListener('mouseleave', () => {
+            if (canvas) canvas.classList.remove('hide-background');
+            if (targetImg) targetImg.classList.remove('active');
+          });
+        });
+      };
+      
+      // Setup after DOM is ready
+      setTimeout(setupFallbackHovers, 100);
+    }
+  }, [supportsHas]);
 
   return (
     <>
+      {/* Show loader while loading */}
+      {isLoading && <Loader onComplete={handleLoaderComplete} />}
+      
       <audio
         ref={audioRef}
         src="/ambience.mp3"
@@ -33,16 +81,17 @@ function App() {
         style={{ display: "none" }}
       />
 
-      <main>
+      <main style={{ opacity: isLoading ? 0 : 1, transition: 'opacity 0.8s ease-in-out' }}>
         <div className="images">
-          <img id="tomorrowland" src="/tommorowland.png" alt="" />
-          <img id="navy-pier" src="/navy-pier.png" alt="" />
-          <img id="msi-chicago" src="/msi-chicago.png" alt="" />
-          <img id="phone" src="/phone.png" alt="" />
-          <img id="kikk" src="/kikk.png" alt="" />
-          <img id="kennedy" src="/kennedy.png" alt="" />
-          <img id="opera" src="/opera.png" alt="" />
+          <img id="tomorrowland" src="/tommorowland.png" alt="Tomorrowland Project" />
+          <img id="navy-pier" src="/navy-pier.png" alt="Navy Pier Project" />
+          <img id="msi-chicago" src="/msi-chicago.png" alt="MSI Chicago Project" />
+          <img id="phone" src="/phone.png" alt="Louise's Phone Project" />
+          <img id="kikk" src="/kikk.png" alt="KIKK Festival Project" />
+          <img id="kennedy" src="/kennedy.png" alt="Kennedy Center Project" />
+          <img id="opera" src="/opera.png" alt="Royal Opera Project" />
         </div>
+        
         <Canvas
           id="canvas-elem"
           shadows
@@ -50,6 +99,7 @@ function App() {
           gl={{
             antialias: true,
             physicallyCorrectLights: true,
+            powerPreference: "high-performance",
           }}
           style={{
             height: "100vh",
@@ -60,21 +110,23 @@ function App() {
             zIndex: 1,
           }}
         >
-          <Environment preset="sunset" />
+          <Suspense fallback={null}>
+            <Environment preset="sunset" />
+            
+            <ambientLight intensity={0.3} />
 
-          <ambientLight intensity={0.3} />
+            <directionalLight
+              position={[3, 5, 5]}
+              intensity={2}
+              castShadow
+              shadow-mapSize-width={2048}
+              shadow-mapSize-height={2048}
+            />
 
-          <directionalLight
-            position={[3, 5, 5]}
-            intensity={2}
-            castShadow
-            shadow-mapSize-width={2048}
-            shadow-mapSize-height={2048}
-          />
+            <directionalLight position={[-3, 2, -4]} intensity={1.5} />
 
-          <directionalLight position={[-3, 2, -4]} intensity={1.5} />
-
-          <Dog />
+            <Dog />
+          </Suspense>
         </Canvas>
 
         <section id="section-1">

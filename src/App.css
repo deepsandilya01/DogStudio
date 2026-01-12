@@ -18,7 +18,7 @@ main {
   position: relative;
 }
 
-html::-webkit-scrollbar{
+html::-webkit-scrollbar {
   display: none;
 }
 
@@ -355,7 +355,7 @@ main:has(#section-2 .title[img-title="opera"]:hover) .images #opera {
     position: relative;
     z-index: 4;
     padding-bottom: 0.3em;
-    a{
+    a {
       text-decoration: none;
       color: azure;
       font-size: 1.5em;
@@ -375,32 +375,31 @@ main:has(#section-2 .title[img-title="opera"]:hover) .images #opera {
   z-index: 4;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 255, 0.13) 0%,
-    rgba(0, 0, 255, 0.069) 40%,
+    rgba(0, 0, 255, 0.067) 0%,
+    rgba(0, 0, 255, 0.033) 40%,
     rgba(0, 0, 255, 0.013) 70%
   );
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 
-
-.linebt{
+.linebt {
   width: 35rem;
-    background-color: rgba(255, 0, 0, 0.335);
-    height: 1.2px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 4;
-    transform: rotate(45deg) translate(0, -17rem);
+  background-color: rgba(255, 0, 0, 0.335);
+  height: 1.2px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+  transform: rotate(45deg) translate(0, -17rem);
 }
 
-.line-3{
- width: 40%;
-    background-color: rgba(255, 0, 0, 0.396);
-    height: 1px;
-    position: absolute;
-    transform: rotate(135deg);
-    bottom: 0;
-    right: 0;
+.line-3 {
+  width: 40%;
+  background-color: rgba(255, 0, 0, 0.396);
+  height: 1px;
+  position: absolute;
+  transform: rotate(135deg);
+  bottom: 0;
+  right: 0;
 }
