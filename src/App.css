@@ -309,7 +309,7 @@ main:has(#section-2 .title[img-title="opera"]:hover) .images #opera {
       font-size: 1rem;
       opacity: 1;
       padding-top: 10px;
-      text-decoration: underline red;
+      text-decoration: underline red ;
     }
   }
 }
@@ -330,15 +330,17 @@ main:has(#section-2 .title[img-title="opera"]:hover) .images #opera {
   justify-content: space-between;
   align-items: center;
 
+  
   h5 {
     position: relative;
     z-index: 4;
     font-size: 2rem;
     font-weight: 200;
     opacity: 1;
-    text-decoration: underline rgba(255, 0, 0, 0.447);
-  }
+    /* text-decoration: underline rgba(255, 0, 0, 0.447); */
 
+  }
+ 
   p {
     position: relative;
     z-index: 4;
